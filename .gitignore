@@ -137,3 +137,21 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Secrets
+.env
+local.properties
+**/local.properties
+
+# Node / Next / Electron
+node_modules/
+**/node_modules
+dist/
+out/
+.next/
+
+# Android
+**/build/
+**/.gradle/
+*.keystore
+*.jks
