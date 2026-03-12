@@ -21,11 +21,10 @@ Audience: professional / advanced users (defensive detection & assessment)
 Phase 0 (Foundation / Safety / Build Integrity)
 
 ## Next Actions (in order)
-1. Add guardrails: AGENTS.md + .github/copilot-instructions.md
-2. Add docs: docs/INDEX.md, docs/ROADMAP.md, docs/DEPENDENCIES.md
-3. Add secrets scaffolding: .env.example + secrets.defaults.properties + strict .gitignore
-4. Simplify / fix CI: build+test+lint + secret scan + timeouts
-5. Setup GitHub labels/milestones/project board; create Phase 0 issues
+1. Add docs: docs/INDEX.md, docs/ROADMAP.md, docs/DEPENDENCIES.md
+2. Add secrets scaffolding: .env.example + secrets.defaults.properties + strict .gitignore
+3. Simplify / fix CI: build+test+lint + secret scan + timeouts
+4. Setup GitHub labels/milestones/project board; create Phase 0 issues
 
 ## Non-goals (for now)
 - No offensive features by default (deauth injection, cracking, etc.)

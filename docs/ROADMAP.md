@@ -1,7 +1,7 @@
 # wscan+ Roadmap
 
 ## Phase 0 — Foundation (must be green before Phase 1)
-- [ ] Add AI guardrails (AGENTS.md + copilot instructions)
+- [x] Add AI guardrails (AGENTS.md + copilot instructions)
 - [ ] Consolidate docs (INDEX + ROADMAP + DEPENDENCIES + SESSION_STATE)
 - [ ] Secrets scaffolding (.env.example, secrets.defaults.properties, .gitignore)
 - [ ] Minimal CI only:
