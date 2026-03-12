@@ -1,0 +1,3 @@
+# .github/CODEOWNERS
+# Automatically assign the Anthropic Claude GitHub App to all pull requests
+* @apps/anthropic-code-agent
