@@ -155,8 +155,7 @@ out/
 **/.gradle/
 *.keystore
 *.jks
-# Claude Code local settings (never commit — agents may write hostile permissions here)
-.claude/settings.local.json
 
-# Temporary fix/utility scripts
-fix-git-state.bat
+
+# Claude AI local files
+.claude/
