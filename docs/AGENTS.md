@@ -23,6 +23,24 @@ Velocity and parallelism are loosened only as empirical data proves sustained st
 - Every PR must reference exactly one GitHub Issue and clearly state its purpose in the PR description.
 - **Never open a new PR while CI is failing.** Fix the broken build first, then continue.
 
+### 1.1 WIP / Draft PR Workflow
+
+**When to use Draft status:**
+- Open PRs as **DRAFT** when starting work on an issue.
+- Keep the PR in DRAFT while implementation is ongoing, tests are incomplete, or CI is red.
+
+**Transitioning from Draft to Ready for Review:**
+1. Complete all implementation work (no TODOs or placeholder code).
+2. Ensure all tests pass locally and CI is green.
+3. Verify all items in the PR checklist are complete.
+4. Mark the PR as "Ready for Review" (convert from draft).
+5. **Only then** request reviewers or tag the maintainer.
+
+**For Reviewers:**
+- **Do not review PRs that are still in DRAFT status** — they are not ready.
+- Only review PRs that have been explicitly converted from draft to "Ready for Review".
+- If a PR is marked ready but CI is red or checklist items are incomplete, request the author convert it back to draft until ready.
+
 ## 2. Keep Changes Small and Atomic
 
 - One feature **or** one bugfix per PR — never combined.
