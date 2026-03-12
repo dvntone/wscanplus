@@ -14,8 +14,11 @@
       "path": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest"
     }
   ],
-  "terminal.integrated.defaultProfile.windows": "JavaSE-17 LTS",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+      "path": "cmd"
+    },
     "JavaSE-17 LTS": {
       "overrideName": true,
       "env": {
