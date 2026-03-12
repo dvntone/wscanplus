@@ -33,6 +33,7 @@ jobs:
         uses: actions/setup-node@f7f5c5e565142bd362e52b4e4e7f98ab528cbb31
         with:
           node-version-file: .nvmrc
+          node-version: 22.x
           cache: 'npm'
           check-latest: true
 
@@ -46,11 +47,11 @@ jobs:
 
       - name: Lint
         if: steps.check_nodejs.outputs.has_package_json == 'true'
-        run: npm run lint || echo '[WARN] Linting failed. Please review logs.'
+        run: npm run lint
 
       - name: Test
         if: steps.check_nodejs.outputs.has_package_json == 'true'
-        run: npm test || echo '[WARN] Tests failed. Please review logs.'
+        run: npm test
 
   android:
     name: Android (JDK 17, Gradle)
@@ -88,12 +89,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@2ef0dac24cb86bbd6f7c74ac031b5ac2c2089b8c
-
-      - name: Run GitHub Advanced Security Secret Scan
-        if: github.event_name == 'pull_request'
-        uses: github/codeql-action/upload-sarif@1b52e9b4256e785cdf0eae30013faa8e3f8c273c
-        with:
-          sarif_file: ''
 
       - name: Manual grep for accidental secrets in code (non-blocking)
         run: |
