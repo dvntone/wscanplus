@@ -39,6 +39,7 @@ jobs:
 
   android:
     name: Android (JDK 17, Gradle)
+    if: ${{ hashFiles('**/gradlew') != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
