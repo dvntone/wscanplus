@@ -12,5 +12,6 @@ Hard rules:
 3. Tests-first; CI must be green.
 4. No shell injection risks: use spawn array form only; validate args.
 5. Do not add new CI scanners (CodeQL/Sonar/Semgrep/etc.) unless explicitly requested.
+6. Open PRs as DRAFT; mark "Ready for Review" only when CI is green and all checklist items are complete.
 
 If a request risks breaking builds or expands scope, STOP and file an Issue proposing a safe phased plan.
