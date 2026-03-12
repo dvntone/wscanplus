@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-gradle",
+    "dbaeumer.vscode-eslint"
+  ],
+  "unwantedRecommendations": [
+    "oracle.oracle-java",
+    "anthropic.claude-code",
+    "google.geminicodeassist",
+    "openai.chatgpt",
+    "google.gemini-cli-vscode-ide-companion"
+  ]
+}
