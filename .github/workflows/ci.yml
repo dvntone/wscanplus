@@ -35,7 +35,6 @@ jobs:
           node-version-file: .nvmrc
           node-version: 22.x
           cache: 'npm'
-          check-latest: true
 
       - name: Show Node Version
         if: steps.check_nodejs.outputs.has_package_json == 'true'
