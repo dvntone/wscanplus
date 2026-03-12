@@ -1,5 +1,8 @@
 # wscan+ AI Agent Rules (must follow)
 
+> Full universal guardrails: **[docs/AGENTS.md](docs/AGENTS.md)**
+> All agents (Claude, Gemini, Copilot/Codex, etc.) must read and follow that document.
+
 ## PR / Issue Policy
 - MAX 1 open PR at a time (total).
 - Every PR must reference exactly one GitHub Issue.
