@@ -155,3 +155,7 @@ out/
 **/.gradle/
 *.keystore
 *.jks
+
+
+# Claude AI local files
+.claude/
