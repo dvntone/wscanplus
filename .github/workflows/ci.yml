@@ -32,10 +32,10 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint || echo '[WARN] Linting failed. Please review logs.'
+        run: npm run lint
 
       - name: Test
-        run: npm test || echo '[WARN] Tests failed. Please review logs.'
+        run: npm test
 
   android:
     name: Android (JDK 17, Gradle)
