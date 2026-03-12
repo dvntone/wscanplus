@@ -1,0 +1,56 @@
+{
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+
+    "files.associations": {
+          "*.env.example": "dotenv",
+          "*.properties": "properties",
+          "*.md": "markdown"
+    },
+
+    "files.exclude": {
+          "**/node_modules": true,
+          "**/.gradle": true,
+          "**/build": true,
+          "**/.DS_Store": true,
+          "**/.claude": true
+    },
+
+    "search.exclude": {
+          "**/node_modules": true,
+          "**/build": true,
+          "**/.gradle": true,
+          "**/.claude": true
+    },
+
+    "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+          "editor.formatOnSave": false
+    },
+
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+          ".env.example": ".env",
+          "*.js": "${capture}.js.map",
+          "package.json": "package-lock.json, .npmrc, .nvmrc"
+    }
+}
