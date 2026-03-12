@@ -1,5 +1,51 @@
 {
-    "cSpell.words": [
-        "wscanplus"
-    ]
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\17",
+      "default": true
+    },
+    {
+      "name": "JavaSE-21",
+      "path": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\21"
+    },
+    {
+      "name": "JavaSE-25",
+      "path": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest"
+    }
+  ],
+  "terminal.integrated.defaultProfile.windows": "JavaSE-17 LTS",
+  "terminal.integrated.profiles.windows": {
+    "JavaSE-17 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\17\\bin;${env:PATH}",
+        "JAVA_HOME": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\17"
+      },
+      "path": "cmd"
+    },
+    "JavaSE-21 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\21\\bin;${env:PATH}",
+        "JAVA_TOOL_OPTIONS": "-Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8",
+        "JAVA_HOME": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\21"
+      },
+      "path": "cmd",
+      "args": [
+        "/k",
+        "chcp",
+        "65001"
+      ]
+    },
+    "JavaSE-25 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest\\bin;${env:PATH}",
+        "JAVA_TOOL_OPTIONS": "-Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8",
+        "JAVA_HOME": "C:\\Users\\Devia\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest"
+      },
+      "path": "cmd"
+    }
+  }
 }
