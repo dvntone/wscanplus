@@ -47,5 +47,9 @@
       },
       "path": "cmd"
     }
-  }
+  },
+  "cSpell.words": [
+    "wscan",
+    "wscanplus"
+  ]
 }
