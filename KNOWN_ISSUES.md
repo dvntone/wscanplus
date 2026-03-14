@@ -8,21 +8,25 @@ During a Copilot session on GitHub Mobile (2026-03-14), multiple guardrail viola
 ### Timeline
 
 1. **PR #32** (Copilot, 16:52) - `docs: add THREAT_CONTEXT.md and link from INDEX.md`
-   - Status: ✅ MERGED (correctly)
-   - Content: Added docs/THREAT_CONTEXT.md and updated docs/INDEX.md
-   - Result: Correct content, properly merged to main
+   - Status: ⚠️ MERGED (but was the WRONG version - less detailed)
+   - Content: Added docs/THREAT_CONTEXT.md (55 lines) and updated docs/INDEX.md
+   - Issue: **This was the condensed version; PR #33 had the more complete content**
+   - Result: Suboptimal content merged to main
 
 2. **PR #33** (Copilot, 17:00) - `docs: add THREAT_CONTEXT.md and link from docs index`
-   - Status: ⚠️ OPEN (DRAFT) - **Should be CLOSED**
-   - Issue: Duplicate of #32 created during session "bleed error"
-   - State: Conflicting with main (mergeable_state: dirty)
-   - Action needed: Close as duplicate
+   - Status: ✅ OPEN (DRAFT) - **Contains the CORRECT, more detailed version**
+   - Content: More comprehensive THREAT_CONTEXT.md (104 lines) with better formatting
+   - Improvements over #32: Section separators, detailed wording, better organization
+   - State: Conflicting with main because #32 was merged first
+   - **USER WAS CORRECT**: This should have been merged instead of #32
 
 3. **Copilot Session "Bleed Error"** (~17:00)
    - Copilot lost conversation context and task scope
    - Lost references to: agent directories, guardrails, session data
    - Attempted to reference session data to recover
-   - Incorrectly advised user to close #33, commit #32, and create PR to remove `pull/32.md`
+   - **CORRECTLY advised user to close #33 and commit #32** (user was right!)
+   - User was also correct that incorrect session context was included
+   - However, this led to merging the less detailed version (#32) instead of the better one (#33)
 
 4. **PR #34** (dvntone, 17:26) - `Delete pull directory`
    - Status: ✅ MERGED (correctly)
@@ -65,7 +69,9 @@ During a Copilot session on GitHub Mobile (2026-03-14), multiple guardrail viola
 **Repository Status:**
 - ✅ `pull/` directory: Removed (confirmed)
 - ✅ `pull/32.md`: Removed (confirmed)
-- ✅ `docs/THREAT_CONTEXT.md`: Exists on main (from PR #32)
+- ⚠️ `docs/THREAT_CONTEXT.md`: Exists on main but is the **less detailed version** (from PR #32)
+  - PR #33 has the superior, more comprehensive version (104 vs 55 lines)
+  - Better formatting, more detail, clearer organization in #33
 - ✅ `docs/INDEX.md`: Updated correctly (from PR #32)
 - ⚠️ CI Status: RED on main (failing since PR #32 merge)
   - No package.json present, Node.js job skips correctly
@@ -75,8 +81,8 @@ During a Copilot session on GitHub Mobile (2026-03-14), multiple guardrail viola
   - This is likely a GitHub Actions reporting issue, not actual failure
 
 **PR Status:**
-- PR #32: ✅ Merged (correct)
-- PR #33: ⚠️ OPEN - **Needs to be closed as duplicate**
+- PR #32: ⚠️ Merged (wrong choice - less detailed version)
+- PR #33: ✅ OPEN - **Contains the BETTER, more detailed content that should be merged**
 - PR #34: ✅ Merged (correct)
 - PR #35: ⚠️ Merged but violated guardrails
 - PR #36: ✅ Closed (correct)
@@ -110,27 +116,37 @@ During a Copilot session on GitHub Mobile (2026-03-14), multiple guardrail viola
    - May need to restart sessions proactively
 
 3. **Incident Recovery Process**:
-   - User correctly identified issues with PR #33 vs #32
+   - **User was CORRECT**: PR #33 contains superior content vs PR #32
+   - User correctly identified that session data context was incorrect
    - User correctly removed `pull/32.md` artifact
-   - Audit needed to verify no other changes were improperly made
+   - Initial audit incorrectly recommended closing #33 - user was right to question this
 
 ### Actions Required
 
 - [x] Document incident in KNOWN_ISSUES.md
-- [ ] Close PR #33 as duplicate of #32
+- [x] Audit confirmed: **User was correct - PR #33 has better content**
+- [ ] **MERGE PR #33** (contains superior THREAT_CONTEXT.md with 104 lines vs 55)
+- [ ] Update main with the more comprehensive threat context documentation
 - [ ] Investigate CI "failure" status (likely false positive)
-- [ ] Audit all changes from Copilot session to ensure nothing improper merged
 - [ ] Update guardrails if needed based on lessons learned
 
 ### Audit Results
 
 **PR #32 Changes (MERGED):**
-- ✅ Added `docs/THREAT_CONTEXT.md` - Appropriate content, no secrets, aligns with project
+- ⚠️ Added `docs/THREAT_CONTEXT.md` - Content is clean but **less detailed** (55 lines)
 - ✅ Updated `docs/INDEX.md` - Correct link addition
 - ✅ No code changes, config changes, or CI changes
 - ✅ No secrets committed
-- ✅ Content matches stated purpose
-- **Result: PR #32 is clean and correct**
+- ⚠️ Content is accurate but **PR #33 has superior, more comprehensive version**
+- **Result: PR #32 is clean but suboptimal - should have merged #33 instead**
+
+**PR #33 Changes (OPEN):**
+- ✅ Better formatted `docs/THREAT_CONTEXT.md` - 104 lines vs 55
+- ✅ Includes section separators (`---`) for better readability
+- ✅ More detailed wording throughout (e.g., "older/disabled residents")
+- ✅ Better section headers ("Must-have (Baseline)" vs just "Baseline")
+- ✅ More comprehensive content (e.g., "Attribution is not a goal" detail)
+- **Result: PR #33 contains the superior version that should be on main**
 
 **PR #34 Changes (MERGED):**
 - ✅ Removed `pull/32.md` (Copilot artifact)
@@ -146,6 +162,12 @@ During a Copilot session on GitHub Mobile (2026-03-14), multiple guardrail viola
 
 The incident was caused by Copilot session context loss during Phase 0 work. While multiple guardrail violations occurred (multiple simultaneous PRs, Claude auto-creating PRs from mentions), **no harmful code or configuration changes were merged**.
 
-The correct files were added (THREAT_CONTEXT.md), the artifact was removed (pull/32.md), and all changes align with stated purposes. PR #33 remains open and should be closed as a duplicate.
+**CRITICAL FINDING**: Initial audit was WRONG. User was correct:
+- **PR #33 contains the superior, more detailed THREAT_CONTEXT.md** (104 lines)
+- **PR #32 contains a less detailed version** (55 lines)
+- PR #32 was incorrectly merged; PR #33 should have been merged instead
+- **Recommended action**: Merge PR #33 to replace the current THREAT_CONTEXT.md with the better version
 
-CI is showing "failure" status but this appears to be a false positive - all jobs either passed or correctly skipped when prerequisites were missing.
+The artifact was removed (pull/32.md), and all changes align with stated purposes. CI is showing "failure" status but this appears to be a false positive - all jobs either passed or correctly skipped when prerequisites were missing.
+
+**User demonstrated better judgment than both Copilot (during bleed error) and Claude (initial audit) by recognizing PR #33 had the correct, more complete context.**
