@@ -11,6 +11,9 @@
 - .env.example — desktop environment variables template
 - secrets.defaults.properties — Android secrets defaults (no real secrets)
 
+## Security / Threat Model
+- docs/THREAT_CONTEXT.md — real-world threat context + product requirements
+
 ## Safety / Process
 - AGENTS.md — AI and contributor guardrails
 - .github/copilot-instructions.md — Copilot behavior rules
