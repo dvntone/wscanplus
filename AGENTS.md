@@ -81,6 +81,7 @@ Every change must be traceable. This means:
 ### Agent Permission Constraints
 - **Code owner ≠ Repository admin**: Being in CODEOWNERS provides review rights, NOT admin access
 - **No direct merge capability**: Agents can create PRs but cannot merge them
+- **No PR closure capability**: Agents cannot close PRs via GitHub API (permission limitation)
 - **No repository settings access**: Agents cannot modify branch protection, GitHub Apps, or repo settings
 - **Session-dependent permissions**: Capabilities may vary between agent sessions
 - **Human approval required**: All merges require manual approval by `@dvntone`

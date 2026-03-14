@@ -84,6 +84,8 @@ Every change must be fully traceable back to the agent that made it:
 ## Section 8: Conflict and Escalation
 
 - If two agents produce conflicting PRs, the second must close its own and file an issue
+  - **Note**: AI agents cannot close PRs via GitHub API (permission limitation). Agent must file an issue and request human closure.
+  - Human (@dvntone) must close the violating PR and ensure only one PR is open at a time
 - After 3 consecutive failed PRs on the same area, stop and file an escalation issue tagged `agent-escalation`
 
 ## Section 9: Ethics and Security
