@@ -2,9 +2,10 @@
 
 ## 2026-03-14: Repository Configuration Changes
 
-### Auto-Merge Disabled
+On 2026-03-14, multiple repository settings were changed by @dvntone (repository admin) to improve security, traceability, and align with AI-driven project workflow requirements.
 
-**Date**: 2026-03-14
+### 1. Auto-Merge Disabled
+
 **Changed by**: @dvntone (repository admin)
 **Recommended by**: Copilot
 **Change**: Disabled auto-merge for all PRs in repository settings
@@ -13,12 +14,81 @@
 - Ensures human oversight on every merge
 - Prevents automated merges without final review
 - Aligns with AI-driven project workflow requiring manual approval by @dvntone
-- Documented in AGENTS.md:138 and docs/AGENTS.md:138
+- Documented in AGENTS.md:90 and docs/AGENTS.md:138
 
 **Impact**:
 - All PRs now require manual merge by @dvntone
 - Auto-merge toggle is disabled in repository settings
-- No changes to branch protection or other settings
+
+### 2. Secondary Rulesets Deleted
+
+**Changed by**: @dvntone (repository admin)
+**Change**: Deleted secondary rulesets from branch protection
+
+**Rationale**:
+- Simplifies branch protection configuration
+- Consolidates rules into single primary ruleset for main branch
+- Reduces complexity and potential conflicts
+
+**Impact**:
+- Only primary branch protection rules remain for main
+- Documented in docs/AGENTS.md:148
+
+### 3. Web Commit Signoff Required
+
+**Changed by**: @dvntone (repository admin)
+**Change**: Enabled required web commit signoff
+
+**Rationale**:
+- Ensures Developer Certificate of Origin (DCO) compliance
+- Adds traceability for all web-based commits
+- Aligns with signed commits requirement for repository
+
+**Impact**:
+- All web-based commits now require signoff
+- Documented in docs/AGENTS.md:151
+
+### 4. GitHub Pages Disabled
+
+**Changed by**: @dvntone (repository admin)
+**Change**: Intentionally disabled GitHub Pages
+
+**Rationale**:
+- Was set up in a prior agent session (pre-fiasco) but never completed
+- Unused feature that could cause confusion
+- Documentation should live in repository markdown files, not separate site
+
+**Impact**:
+- GitHub Pages deployment is disabled
+- All documentation remains in repository (AGENTS.md, docs/, README.md)
+- **Do not re-enable without a tracked issue approved by @dvntone**
+- Documented in docs/AGENTS.md:154
+
+### 5. Google Cloud Apps Disabled
+
+**Changed by**: @dvntone (repository admin)
+**Change**: Disabled Google Cloud Build and Google Cloud Developer Connect GitHub Apps
+
+**Rationale**:
+- Connected during Gemini-era agent session, not intentionally configured
+- Not part of approved tooling for this project
+- Reduces attack surface and prevents unintended cloud integrations
+- Project uses Gemini/Vertex AI only within Android app, not for CI/CD
+
+**Impact**:
+- Google Cloud Build app: disabled
+- Google Cloud Developer Connect app: disabled
+- No impact on Android app's intentional Gemini/Vertex AI integration
+- Documented in docs/AGENTS.md:162-163
+
+### Summary of Changes
+
+All changes were made on 2026-03-14 to improve repository security, simplify configuration, and align with AI-driven project workflow. These changes ensure:
+- Manual human oversight on all merges
+- Simplified branch protection rules
+- DCO compliance via web commit signoff
+- Removal of incomplete/unintended features
+- Minimal external integrations (only approved GitHub Apps remain)
 
 ---
 
