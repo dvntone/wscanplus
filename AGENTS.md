@@ -55,3 +55,49 @@ Every change must be traceable. This means:
 - Commit messages must be descriptive (what changed and why — not just "update file")
 - Every PR description must state: which agent made it, what was changed and why, and which rules guided the decisions
 - No force-pushes. No amending commits after they are merged.
+
+## Repository Settings (as of 2026-03-14)
+
+### Merge Strategy
+- Squash merge only ✅
+- Merge commits: disabled ❌
+- Rebase merging: disabled ❌
+- Reason: squash merge keeps linear history and ensures web-flow signs the squash commit, working around the agent commit signing limitation.
+
+### Agent Signing Limitation
+- Copilot (copilot-swe-agent) cannot sign individual commits.
+- Claude (anthropic-code-agent) cannot sign individual commits.
+- Squash merge via GitHub UI results in a verified, web-flow signed commit — this is the **intended and only approved merge method**.
+
+### PR Policy
+- PRs restricted to collaborators only.
+- Auto-merge: OFF — every PR requires manual merge by `@dvntone`.
+- Auto-delete head branches: ON — branches auto-delete after merge.
+
+### Branch Protection (main)
+- Require PR before merging ✅
+- Require 1 approval ✅
+- Require code owner review ✅
+- Require signed commits ✅
+- Require linear history ✅
+- Dismiss stale reviews: OFF
+- Secondary rulesets: none (deleted 2026-03-14)
+
+### Web Commit Signoff
+- Required ✅ (enabled 2026-03-14)
+
+### GitHub Pages
+- Disabled intentionally on 2026-03-14. Was set up in a prior agent session (pre-fiasco) and never completed. **Do not re-enable without a tracked issue approved by `@dvntone`.**
+
+### GitHub Apps (approved)
+- Codex ✅
+- Claude ✅
+- GitGuardian ✅
+
+### GitHub Apps (disabled)
+- Google Cloud Build ❌ — connected during Gemini-era agent session, not intentionally configured, disabled 2026-03-14.
+- Google Cloud Developer Connect ❌ — same reason.
+
+### Wiki & Projects
+- Wiki: disabled ❌ — all documentation lives in repo markdown files (AGENTS.md, docs/).
+- Projects: disabled ❌ — work tracked via Issues only.
