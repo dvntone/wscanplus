@@ -1,5 +1,27 @@
 # Known Issues
 
+## 2026-03-14: Repository Configuration Changes
+
+### Auto-Merge Disabled
+
+**Date**: 2026-03-14
+**Changed by**: @dvntone (repository admin)
+**Recommended by**: Copilot
+**Change**: Disabled auto-merge for all PRs in repository settings
+
+**Rationale**:
+- Ensures human oversight on every merge
+- Prevents automated merges without final review
+- Aligns with AI-driven project workflow requiring manual approval by @dvntone
+- Documented in AGENTS.md:138 and docs/AGENTS.md:138
+
+**Impact**:
+- All PRs now require manual merge by @dvntone
+- Auto-merge toggle is disabled in repository settings
+- No changes to branch protection or other settings
+
+---
+
 ## 2026-03-14: Copilot Session Incident (PR #32-#36)
 
 ### Summary

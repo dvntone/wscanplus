@@ -135,7 +135,7 @@ Every change must be fully traceable back to the agent that made it:
 
 ### PR Policy
 - PRs restricted to collaborators only.
-- Auto-merge: OFF — every PR requires manual merge by `@dvntone`.
+- Auto-merge: OFF (disabled 2026-03-14 per Copilot recommendation) — every PR requires manual merge by `@dvntone`.
 - Auto-delete head branches: ON — branches auto-delete after merge.
 
 ### Branch Protection (main)
