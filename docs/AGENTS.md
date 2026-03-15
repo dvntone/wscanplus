@@ -159,7 +159,6 @@ Every change must be fully traceable back to the agent that made it:
 - [ ] `.env` / `local.properties` NOT committed
 - [ ] No secrets of any kind committed
 - [ ] Required platform checks passed (see table above)
-- [ ] Required platform checks passed (see table above)
 - [ ] Merged via **Squash and merge** only (merge commits and rebase are disabled)
 - [ ] Gemini/Vertex integration untouched (or issue filed if change needed)
 
