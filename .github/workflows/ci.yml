@@ -132,6 +132,7 @@ jobs:
         run: |
           if grep -rIl \
             --exclude-dir=.git \
+            --exclude-dir=.github \
             --exclude='*.example' \
             --exclude='secrets.defaults.*' \
             --exclude='SECRETS.md' \
