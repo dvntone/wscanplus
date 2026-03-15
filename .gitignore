@@ -143,6 +143,22 @@ vite.config.ts.timestamp-*
 local.properties
 **/local.properties
 
+# Android secret/credential files (common leak vectors)
+google-services.json
+**/google-services.json
+google-services-*.json
+keystore.properties
+**/keystore.properties
+gradle.properties
+# Note: only ignore root gradle.properties if it contains secrets —
+# use keystore.properties or local.properties for secrets instead
+release.keystore
+*.p12
+*.pfx
+# Google Maps / Firebase
+agconnect-services.json
+**/agconnect-services.json
+
 # Node / Next / Electron
 node_modules/
 **/node_modules
@@ -155,3 +171,7 @@ out/
 **/.gradle/
 *.keystore
 *.jks
+
+
+# Claude AI local files
+.claude/
