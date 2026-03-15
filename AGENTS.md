@@ -51,8 +51,8 @@ Only these agents may write or modify code, docs, and config in this repo:
 
 ## Branch Protection & Reviews
 
-- Branch protection requires 1 approving review and applies to administrators.
-- As sole human maintainer, @dvntone must bypass this requirement to self-merge.
+- Branch protection requires 1 approving **code owner** review (per `.github/CODEOWNERS`) and applies to administrators.
+- As sole human maintainer, @dvntone must technically bypass this enforced requirement to self-merge, but PRs should still satisfy the code-owner review rule.
 - **This is a known friction point.** Do not recommend re-enabling auto-merge or relaxing
   branch protection rules — the bypass is intentional and preferable to removing the guardrail.
 - Agents cannot approve their own PRs or merge via API. All merges require human action on GitHub web.
