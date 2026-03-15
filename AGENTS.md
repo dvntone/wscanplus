@@ -56,7 +56,7 @@ Only these agents may write or modify code, docs, and config in this repo:
 - As sole human maintainer, @dvntone must technically bypass this enforced requirement to self-merge, but PRs should still satisfy the code-owner review rule.
 - **This is a known friction point.** Do not recommend re-enabling auto-merge or relaxing
   branch protection rules — the bypass is intentional and preferable to removing the guardrail.
-- Agents cannot approve their own PRs or merge via API. All merges require human action on GitHub web.
+- Agents cannot approve their own PRs. Merges are performed by @dvntone via `gh pr merge --admin --squash` from the Claude Code CLI (not the GitHub web UI).
 
 ## Required checks before "done"
 
@@ -98,7 +98,7 @@ Every change must be traceable. This means:
 
 ### PR Policy
 - PRs restricted to collaborators only.
-- Auto-merge: OFF (disabled 2026-03-14 per Copilot recommendation) — every PR requires manual merge by `@dvntone`.
+- Auto-merge: OFF (disabled 2026-03-14 per Copilot recommendation) — every PR is merged manually by @dvntone via `gh pr merge --admin --squash` from the Claude Code CLI.
 - Auto-delete head branches: ON — branches auto-delete after merge.
 
 ### Branch Protection (main)

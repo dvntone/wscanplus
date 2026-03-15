@@ -73,6 +73,19 @@ Every change must be fully traceable back to the agent that made it:
 - Every PR must reference exactly one GitHub Issue
 - Never open a new PR while CI is failing — fix the broken build first
 
+## Section 1.1: Draft PR Workflow
+
+- **All PRs must be opened as DRAFT** using `gh pr create --draft`.
+- Draft status signals work in progress — CI must run, but reviewers must not review draft PRs.
+- A PR may be marked **Ready for Review** only when ALL of the following are true:
+  1. All CI checks have passed (no failures, no pending jobs)
+  2. Every item in the PR description checklist is complete
+  3. No unresolved `blocker` or `security` issues are open
+  4. The PR references exactly one GitHub Issue
+  5. No secrets are committed
+- After marking Ready for Review, wait for Copilot review to complete before merging.
+- Never mark a draft Ready for Review to force a faster merge — if CI is red, fix it first.
+
 ## 1a. Merge Strategy — Squash Only
 
 - **Only squash merge is enabled on this repository.** Merge commits and rebase are disabled.
