@@ -7,6 +7,8 @@
 - MAX 1 open PR at a time (total).
 - Every PR must reference exactly one GitHub Issue.
 - If CI is red: fix CI before any new PR or feature work.
+- **Merge strategy: Squash and merge only.** Merge commits and rebase are disabled.
+  Squash uses the GitHub web push API, which signs commits — required for all AI-authored work.
 
 ## Session Limits
 - One feature OR one bugfix per session.

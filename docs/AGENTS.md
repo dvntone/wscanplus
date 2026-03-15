@@ -23,6 +23,16 @@ Velocity and parallelism are loosened only as empirical data proves sustained st
 - Every PR must reference exactly one GitHub Issue and clearly state its purpose in the PR description.
 - **Never open a new PR while CI is failing.** Fix the broken build first, then continue.
 
+## 1a. Merge Strategy — Squash Only
+
+- **Only squash merge is enabled on this repository.** Merge commits and rebase are disabled.
+- This is intentional and must not be re-enabled without explicit maintainer approval.
+- **Why squash is required for AI-authored work:** Squash merge uses the GitHub web push API,
+  which signs the resulting commit on behalf of the actor. Without squash, AI agent commits
+  would be unsigned, breaking commit signing requirements and traceability.
+- Agents must never instruct maintainers to use merge or rebase strategies.
+- If you encounter a merge UI offering all three options, use **Squash and merge** only.
+
 ## 2. Keep Changes Small and Atomic
 
 - One feature **or** one bugfix per PR — never combined.
@@ -115,6 +125,7 @@ Velocity and parallelism are loosened only as empirical data proves sustained st
 - [ ] .env / local.properties NOT committed
 - [ ] No secrets of any kind committed
 - [ ] Required platform checks passed (see table above)
+- [ ] Merged via **Squash and merge** only (merge commits and rebase are disabled)
 ```
 
 ---
