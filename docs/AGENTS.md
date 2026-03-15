@@ -73,11 +73,12 @@ Every change must be fully traceable back to the agent that made it:
 
 - **Only squash merge is enabled on this repository.** Merge commits and rebase are disabled.
 - This is intentional and must not be re-enabled without explicit maintainer approval.
-- **Why squash is required for AI-authored work:** Squash merge uses the GitHub web push API,
-  which signs the resulting commit on behalf of the actor. Without squash, AI agent commits
-  would be unsigned, breaking commit signing requirements and traceability.
-- Agents must never instruct maintainers to use merge or rebase strategies.
-- If you encounter a merge UI offering all three options, use **Squash and merge** only.
+- **Why squash is required for AI-authored work:** Squash merge produces a single
+  GitHub-generated, **Verified** commit on the protected branch. This ensures the commit
+  that lands on `main` is signed, even when the individual PR commits from AI agents are not.
+  Enabling merge commits or rebase would allow unsigned intermediate commits to land on `main`
+  directly, breaking commit verification.
+- Agents must never instruct the maintainer to re-enable merge commits or rebase.
 
 ## 2. Keep Changes Small and Atomic
 - Only one open feature or bugfix PR at any time across all agents

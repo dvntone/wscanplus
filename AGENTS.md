@@ -34,7 +34,7 @@ Only these agents may write or modify code, docs, and config in this repo:
 - Every PR must reference exactly one GitHub Issue.
 - If CI is red: fix CI before any new PR or feature work.
 - **Merge strategy: Squash and merge only.** Merge commits and rebase are disabled.
-  Squash uses the GitHub web push API, which signs commits — required for all AI-authored work.
+  Squash produces a GitHub-generated Verified commit on `main` — unsigned AI commits must not land directly.
 
 - MAX 1 open PR at a time (total, across all agents)
 - Every PR must reference exactly one GitHub Issue
@@ -52,6 +52,14 @@ Only these agents may write or modify code, docs, and config in this repo:
 - Never run Electron app as root
 - No `exec()` with interpolated strings — use `spawn(cmd, [args])` only
 - Validate all args passed to child processes (interfaces, paths, ports)
+
+## Branch Protection & Reviews
+
+- Branch protection requires 1 approving review and applies to administrators.
+- As sole human maintainer, @dvntone must bypass this requirement to self-merge.
+- **This is a known friction point.** Do not recommend re-enabling auto-merge or relaxing
+  branch protection rules — the bypass is intentional and preferable to removing the guardrail.
+- Agents cannot approve their own PRs or merge via API. All merges require human action on GitHub web.
 
 ## Required checks before "done"
 
