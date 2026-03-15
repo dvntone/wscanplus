@@ -56,11 +56,11 @@ adb version
 java -version
 
 # Optional tools
-iw --version 2>/dev/null || echo "iw not installed"
-airmon-ng --help 2>/dev/null | head -1 || echo "airmon-ng not installed"
-tshark --version 2>/dev/null | head -1 || echo "tshark not installed"
-kismet --version 2>/dev/null | head -1 || echo "kismet not installed"
-bettercap --version 2>/dev/null | head -1 || echo "bettercap not installed"
+if command -v iw >/dev/null 2>&1; then iw --version 2>/dev/null; else echo "iw not installed"; fi
+if command -v airmon-ng >/dev/null 2>&1; then airmon-ng --help 2>/dev/null | head -1; else echo "airmon-ng not installed"; fi
+if command -v tshark >/dev/null 2>&1; then tshark --version 2>/dev/null | head -1; else echo "tshark not installed"; fi
+if command -v kismet >/dev/null 2>&1; then kismet --version 2>/dev/null | head -1; else echo "kismet not installed"; fi
+if command -v bettercap >/dev/null 2>&1; then bettercap --version 2>/dev/null | head -1; else echo "bettercap not installed"; fi
 
 # Android
 cd android && ./gradlew -v
