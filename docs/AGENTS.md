@@ -69,6 +69,10 @@ Every change must be fully traceable back to the agent that made it:
 
 ## Section 1: Single Work Unit at a Time
 
+- Only one open feature or bugfix PR at any time across all agents
+- Every PR must reference exactly one GitHub Issue
+- Never open a new PR while CI is failing — fix the broken build first
+
 ## 1a. Merge Strategy — Squash Only
 
 - **Only squash merge is enabled on this repository.** Merge commits and rebase are disabled.
@@ -79,11 +83,6 @@ Every change must be fully traceable back to the agent that made it:
   Enabling merge commits or rebase would allow unsigned intermediate commits to land on `main`
   directly, breaking commit verification.
 - Agents must never instruct the maintainer to re-enable merge commits or rebase.
-
-## 2. Keep Changes Small and Atomic
-- Only one open feature or bugfix PR at any time across all agents
-- Every PR must reference exactly one GitHub Issue
-- Never open a new PR while CI is failing — fix the broken build first
 
 ## Section 2: Keep Changes Small and Atomic
 
@@ -160,11 +159,8 @@ Every change must be fully traceable back to the agent that made it:
 - [ ] `.env` / `local.properties` NOT committed
 - [ ] No secrets of any kind committed
 - [ ] Required platform checks passed (see table above)
+- [ ] Required platform checks passed (see table above)
 - [ ] Merged via **Squash and merge** only (merge commits and rebase are disabled)
-```
-
----
-- [ ] Required platform checks passed
 - [ ] Gemini/Vertex integration untouched (or issue filed if change needed)
 
 ## Repository Settings (as of 2026-03-14)
