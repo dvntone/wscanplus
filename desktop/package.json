@@ -1,0 +1,22 @@
+{
+  "name": "wscanplus-desktop",
+  "version": "0.0.1",
+  "description": "wscan+ Desktop — Linux-first Electron WiFi threat detection hub",
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "lint": "echo \"No lint configured for desktop package yet\" && exit 0",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
+  "devDependencies": {
+    "electron": "30.0.0",
+    "eslint": "9.0.0",
+    "jest": "29.7.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [],
+  "author": "dvntone",
+  "license": "GPL-3.0-only"
+}
