@@ -135,7 +135,7 @@ jobs:
             --exclude='SECRETS.md' \
             --exclude='SECURITY.md' \
             --exclude='KNOWN_ISSUES.md' \
-            -E 'AKIA[0-9A-Z]{16}|AIzaSy[0-9A-Za-z_-]{33}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|ghp_[0-9A-Za-z]{36}|ghs_[0-9A-Za-z]{36}' \
+            -E 'AKIA[0-9A-Z]{16}|AIzaSy[0-9A-Za-z_-]{33}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|-----BEGIN PGP PRIVATE KEY BLOCK-----|-----BEGIN (CERTIFICATE|X509 CERTIFICATE|TRUSTED CERTIFICATE)-----|ghp_[0-9A-Za-z]{36}|ghs_[0-9A-Za-z]{36}' \
             .; then
             echo "ERROR: Potential secrets detected. Review the files above before merging."
             exit 1
