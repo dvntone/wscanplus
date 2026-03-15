@@ -52,7 +52,7 @@ All HTTP responses from the local desktop server must include:
 
 ```js
 // CORRECT — always use spawn with argument array
-const { spawn } = require('child_process');
+import { spawn } from 'node:child_process';
 spawn('iw', ['dev']);
 
 // NEVER DO THIS
@@ -81,6 +81,12 @@ exec(`iw ${userInput}`);  // shell injection risk
 
 The CI workflow runs a secret scan on every PR. A match causes the build to **fail** — do not bypass without understanding the match.
 
-Patterns scanned: `AKIA`, `AIza`, `AIzaSy`, `-----BEGIN`, `SECRET_KEY`, `PRIVATE_KEY`, `PASSWORD`, `TOKEN`
+The scanner looks for common high-risk secret formats, including (but not limited to):
+- AWS access key IDs (for example, patterns starting with `AKIA` such as `AKIA[0-9A-Z]{16}`)
+- Google API keys (for example, keys starting with `AIza` / `AIzaSy`)
+- GitHub personal access tokens (for example, prefixes like `ghp_` / `ghs_`)
+- PEM/PGP blocks (for example, lines starting with `-----BEGIN`)
+
+The exact patterns are defined in `.github/workflows/ci.yml`. Refer to that file when triaging secret-scan failures or suspected false positives.
 
 If a false positive is triggered, document the reason in the PR description and request maintainer review.
