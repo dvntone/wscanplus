@@ -1,10 +1,10 @@
 name: Agent Guarded CI
 
-on:
+"on":
   pull_request:
   push:
     branches-ignore:
-      - main  # Prevents direct push to main
+      - main
 
 permissions:
   contents: read
