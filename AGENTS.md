@@ -48,6 +48,7 @@ Only these agents may write or modify code, docs, and config in this repo:
 - Never run Electron app as root
 - No `exec()` with interpolated strings — use `spawn(cmd, [args])` only
 - Validate all args passed to child processes (interfaces, paths, ports)
+- **No new feature work while a `blocker` or `security`-labeled issue is open.**
 
 ## Branch Protection & Reviews
 

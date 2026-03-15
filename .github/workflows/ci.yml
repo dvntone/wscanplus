@@ -14,54 +14,68 @@ jobs:
   nodejs:
     name: Node.js (via .nvmrc preferred, fallback 22.x)
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@2ef0dac24cb86bbd6f7c74ac031b5ac2c2089b8c
+        timeout-minutes: 2
 
       - name: Check for Node.js project files
         id: check_nodejs
+        timeout-minutes: 1
         run: |
-          if [ -f "package.json" ]; then
+          if [ -f "desktop/package.json" ]; then
             echo "has_package_json=true" >> $GITHUB_OUTPUT
           else
             echo "has_package_json=false" >> $GITHUB_OUTPUT
-            echo "Skipping Node.js build: no package.json found"
+            echo "Skipping Node.js build: no desktop/package.json found"
           fi
 
       - name: Setup Node.js from .nvmrc or fallback
         if: steps.check_nodejs.outputs.has_package_json == 'true'
         uses: actions/setup-node@f7f5c5e565142bd362e52b4e4e7f98ab528cbb31
+        timeout-minutes: 3
         with:
           node-version-file: .nvmrc
           node-version: 22.x
           cache: 'npm'
+          cache-dependency-path: desktop/package-lock.json
 
-      - name: Show Node Version
+      - name: Show Node version
         if: steps.check_nodejs.outputs.has_package_json == 'true'
         run: node --version
 
       - name: Install dependencies
         if: steps.check_nodejs.outputs.has_package_json == 'true'
+        timeout-minutes: 5
+        working-directory: desktop
         run: npm ci
 
       - name: Lint
         if: steps.check_nodejs.outputs.has_package_json == 'true'
+        timeout-minutes: 3
+        working-directory: desktop
         run: npm run lint
 
       - name: Test
         if: steps.check_nodejs.outputs.has_package_json == 'true'
+        timeout-minutes: 5
+        working-directory: desktop
         run: npm test
 
   android:
     name: Android (JDK 17, Gradle)
-    if: ${{ hashFiles('**/gradlew') != '' }}
+    if: ${{ hashFiles('android/gradlew') != '' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout Code
         uses: actions/checkout@2ef0dac24cb86bbd6f7c74ac031b5ac2c2089b8c
+        timeout-minutes: 2
 
       - name: Set up JDK 17
         uses: actions/setup-java@fae39c5442bc39e562b8a980dac6e97be4c3fa60
+        timeout-minutes: 3
         with:
           distribution: 'temurin'
           java-version: 17
@@ -72,30 +86,51 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle*', 'android/**/gradle-wrapper.properties') }}
           restore-keys: |
             gradle-${{ runner.os }}-
 
       - name: Grant execute permission to gradlew
+        working-directory: android
         run: chmod +x ./gradlew
 
+      - name: Android Unit Tests
+        timeout-minutes: 10
+        working-directory: android
+        run: ./gradlew :core:test
+
       - name: Android Build (assembleDebug)
+        timeout-minutes: 15
+        working-directory: android
         run: ./gradlew assembleDebug
 
   secret-scan:
-    name: GitHub Secret Scan
+    name: Secret Scan (blocking)
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@2ef0dac24cb86bbd6f7c74ac031b5ac2c2089b8c
+        timeout-minutes: 2
 
-      - name: Manual grep for accidental secrets in code (non-blocking)
+      - name: Scan for accidental secrets
+        timeout-minutes: 2
         run: |
-          if grep -rIl --exclude-dir=.git --exclude='.env*' --exclude='secrets.*' -E 'AKIA|AIza|AIzaSy|-----BEGIN|SECRET_KEY|PRIVATE_KEY|PASSWORD|TOKEN' .; then
-            echo "Warning: Potential secrets found. Review required."
+          if grep -rIl \
+            --exclude-dir=.git \
+            --exclude='*.example' \
+            --exclude='secrets.defaults.*' \
+            --exclude='SECRETS.md' \
+            --exclude='SECURITY.md' \
+            --exclude='KNOWN_ISSUES.md' \
+            -E 'AKIA[0-9A-Z]{16}|AIzaSy[0-9A-Za-z_-]{33}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|ghp_[0-9A-Za-z]{36}|ghs_[0-9A-Za-z]{36}' \
+            .; then
+            echo "ERROR: Potential secrets detected. Review the files above before merging."
+            exit 1
           else
-            echo "No obvious secrets found."
+            echo "No secrets detected."
           fi
 
-# Guardrails: No deploy/merge/trigger jobs. No auto pushes. Only triggers on PRs or non-main branch pushes.
-# All failures are surfaced for manual or permitted agent review only.
+# Guardrails: No deploy/merge/trigger jobs. No auto pushes.
+# Only triggers on PRs or non-main branch pushes.
+# All failures must be resolved before merging — see docs/AGENTS.md.
