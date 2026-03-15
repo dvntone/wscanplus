@@ -86,7 +86,7 @@ Every change must be traceable. This means:
 ### Agent Signing Limitation
 - Copilot (copilot-swe-agent) cannot sign individual commits.
 - Claude (anthropic-code-agent) cannot sign individual commits.
-- Squash merge via GitHub UI results in a verified, web-flow signed commit — this is the **intended and only approved merge method**.
+- Squash merge via GitHub UI or `gh pr merge --admin --squash` from the Claude Code CLI both result in a verified, web-flow signed commit — either is an approved merge method.
 
 ### Agent Permission Constraints
 - **Code owner ≠ Repository admin**: Being in CODEOWNERS provides review rights, NOT admin access
