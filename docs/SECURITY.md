@@ -83,7 +83,7 @@ The CI workflow runs a secret scan on every PR. A match causes the build to **fa
 
 The scanner looks for common high-risk secret formats, including (but not limited to):
 - AWS access key IDs (for example, patterns starting with `AKIA` such as `AKIA[0-9A-Z]{16}`)
-- Google API keys (for example, keys starting with `AIza` / `AIzaSy`)
+- Google API keys (for example, keys starting with `AIzaSy`)
 - GitHub personal access tokens (for example, prefixes like `ghp_` / `ghs_`)
 - PEM/PGP blocks (for example, lines starting with `-----BEGIN`)
 
