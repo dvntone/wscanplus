@@ -173,6 +173,9 @@ out/
 *.jks
 
 
+# Android Studio IDE files
+android/.idea/
+
 # Claude AI local files
 .claude/
 
