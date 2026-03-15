@@ -95,8 +95,8 @@ wscanplus/
 2. ~~Add docs: INDEX, ROADMAP, DEPENDENCIES, SESSION_STATE~~ ✅
 3. ~~Add secrets scaffolding: .env.example + secrets.defaults.properties + .gitignore~~ ✅
 4. Fix and complete CI: timeouts + Android unit test + blocking secret scan ← **in progress**
-5. Configure GitHub repo secrets (GOOGLE_MAPS_API_KEY, VERTEX_AI_API_KEY, Android keystore) ← **pending**
-6. Create GitHub labels/milestones for Phase 1 planning ← **pending**
+5. ~~Configure GitHub repo secrets~~ ✅ — 7 secrets configured 2026-03-15: GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_SIGNING_SECRET, VERTEX_AI_API_KEY, ANDROID_KEYSTORE, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD, ANDROID_STORE_PASSWORD
+6. Create GitHub labels/milestones for Phase 1 planning ← **pending** (labels already exist, milestones TBD)
 
 ---
 
