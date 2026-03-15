@@ -10,6 +10,34 @@ Only these agents may write or modify code, docs, and config:
 - **Copilot / Codex** (GitHub) — secondary coding agent
 - **Gemini is NOT a coding agent for this repo.** See AI Split section.
 
+## Execution Environments & Permissions
+
+AI agents can run in different environments with different GitHub API permissions:
+
+### GitHub Copilot Integration (Current Environment)
+- **How it works**: Claude/Copilot runs through GitHub's agent infrastructure
+- **Authentication**: GitHub App with limited, scoped permissions
+- **Can do**: Create PRs, commit code, comment, read repository, approve reviews (as code owner)
+- **Cannot do**: Close PRs, merge PRs, modify repository settings, change branch protection
+- **Why**: GitHub App permissions are restricted for security; the app doesn't have `closePullRequest`, `mergePullRequest`, or admin permissions
+
+### Claude Code CLI (Native Anthropic Tool)
+- **How it works**: Runs locally on user's machine with user's GitHub credentials
+- **Authentication**: User's personal access token or OAuth (inherits user's permissions)
+- **Can do**: Everything the authenticated user can do
+- **Cannot do**: Nothing additional beyond user's GitHub account permissions
+- **Why**: Direct user credentials = direct user permissions
+
+### Implication for Guardrails
+
+The rules in this file (e.g., "agent must close its own PR") were written assuming **native CLI context** where agents inherit user permissions. When running through **GitHub's Copilot integration**, these actions require human intervention:
+
+- ❌ Agent cannot close PRs → ✅ Agent files issue, human closes PR
+- ❌ Agent cannot merge PRs → ✅ Human manually merges all PRs
+- ❌ Agent cannot modify settings → ✅ Only `@dvntone` modifies repository settings
+
+**Current reality**: This repository uses GitHub Copilot integration, so all administrative actions require `@dvntone`.
+
 ## AI Split (Critical — do not change without maintainer approval)
 
 | Role | AI | Where |
@@ -84,6 +112,8 @@ Every change must be fully traceable back to the agent that made it:
 ## Section 8: Conflict and Escalation
 
 - If two agents produce conflicting PRs, the second must close its own and file an issue
+  - **Note**: AI agents cannot close PRs via GitHub API (permission limitation). Agent must file an issue and request human closure.
+  - Human (@dvntone) must close the violating PR and ensure only one PR is open at a time
 - After 3 consecutive failed PRs on the same area, stop and file an escalation issue tagged `agent-escalation`
 
 ## Section 9: Ethics and Security
@@ -135,7 +165,7 @@ Every change must be fully traceable back to the agent that made it:
 
 ### PR Policy
 - PRs restricted to collaborators only.
-- Auto-merge: OFF — every PR requires manual merge by `@dvntone`.
+- Auto-merge: OFF (disabled 2026-03-14 per Copilot recommendation) — every PR requires manual merge by `@dvntone`.
 - Auto-delete head branches: ON — branches auto-delete after merge.
 
 ### Branch Protection (main)

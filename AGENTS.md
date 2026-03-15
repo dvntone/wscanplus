@@ -2,6 +2,15 @@
 
 Full universal guardrails: [docs/AGENTS.md](docs/AGENTS.md)
 
+## AI-Driven Project Notice
+
+**This is an AI code project.** Multiple AI agents collaborate to build and maintain this codebase under human oversight. Each agent session may have different permissions and capabilities:
+
+- **Code Owner Status**: Claude is listed in `.github/CODEOWNERS` as a required reviewer but does NOT have repository admin permissions
+- **Session Variability**: Agent permissions can change between sessions (e.g., yesterday's code owner capabilities may not persist today)
+- **Human Control**: Only `@dvntone` has repository admin access and manually approves/merges all PRs
+- **Agent Limitations**: Agents cannot directly merge PRs, modify branch protection, change repository settings, or perform administrative actions
+
 ## Approved Coding Agents
 
 Only these agents may write or modify code, docs, and config in this repo:
@@ -69,9 +78,17 @@ Every change must be traceable. This means:
 - Claude (anthropic-code-agent) cannot sign individual commits.
 - Squash merge via GitHub UI results in a verified, web-flow signed commit — this is the **intended and only approved merge method**.
 
+### Agent Permission Constraints
+- **Code owner ≠ Repository admin**: Being in CODEOWNERS provides review rights, NOT admin access
+- **No direct merge capability**: Agents can create PRs but cannot merge them
+- **No PR closure capability**: Agents cannot close PRs via GitHub API (permission limitation)
+- **No repository settings access**: Agents cannot modify branch protection, GitHub Apps, or repo settings
+- **Session-dependent permissions**: Capabilities may vary between agent sessions
+- **Human approval required**: All merges require manual approval by `@dvntone`
+
 ### PR Policy
 - PRs restricted to collaborators only.
-- Auto-merge: OFF — every PR requires manual merge by `@dvntone`.
+- Auto-merge: OFF (disabled 2026-03-14 per Copilot recommendation) — every PR requires manual merge by `@dvntone`.
 - Auto-delete head branches: ON — branches auto-delete after merge.
 
 ### Branch Protection (main)
