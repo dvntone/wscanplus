@@ -60,31 +60,42 @@ jobs:
           fi
 
       - name: Lint
-        if: ${{ steps.check_nodejs.outputs.has_package_json == 'true' && hashFiles('desktop/.eslintrc*', 'desktop/eslint.config.*') != '' }}
+        if: steps.check_nodejs.outputs.has_package_json == 'true' && hashFiles('desktop/.eslintrc*', 'desktop/eslint.config.*') != ''
         working-directory: desktop
         run: npm run lint
 
       - name: Test
-        if: ${{ steps.check_nodejs.outputs.has_package_json == 'true' && hashFiles('desktop/jest.config.*', 'desktop/**/*.test.[jt]s', 'desktop/**/*.spec.[jt]s') != '' }}
+        if: steps.check_nodejs.outputs.has_package_json == 'true' && hashFiles('desktop/jest.config.*', 'desktop/**/*.test.[jt]s', 'desktop/**/*.spec.[jt]s') != ''
         working-directory: desktop
         run: npm test
 
   android:
     name: Android (JDK 17, Gradle)
-    if: ${{ hashFiles('android/gradlew') != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Checkout Code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
+      - name: Check for gradlew
+        id: check_gradlew
+        run: |
+          if [ ! -f "android/gradlew" ]; then
+            echo "Skipping Android build: android/gradlew not present"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up JDK 17
+        if: steps.check_gradlew.outputs.skip != 'true'
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654
         with:
           distribution: temurin
           java-version: 17
 
       - name: Cache Gradle packages
+        if: steps.check_gradlew.outputs.skip != 'true'
         uses: actions/cache@3b0346c531297cd300fe2e9edee4777ce94cf486
         with:
           path: |
@@ -95,14 +106,17 @@ jobs:
             gradle-${{ runner.os }}-
 
       - name: Grant execute permission to gradlew
+        if: steps.check_gradlew.outputs.skip != 'true'
         working-directory: android
         run: chmod +x ./gradlew
 
       - name: Android Unit Tests
+        if: steps.check_gradlew.outputs.skip != 'true'
         working-directory: android
         run: ./gradlew :core:test
 
       - name: Android Build (assembleDebug)
+        if: steps.check_gradlew.outputs.skip != 'true'
         working-directory: android
         run: ./gradlew assembleDebug
 
