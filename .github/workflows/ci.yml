@@ -24,15 +24,16 @@ jobs:
         id: check_nodejs
         timeout-minutes: 1
         run: |
-          if [ -f "desktop/package.json" ] && [ -f "desktop/package-lock.json" ]; then
+          if [ -f "desktop/package.json" ]; then
             echo "has_package_json=true" >> "$GITHUB_OUTPUT"
+            if [ -f "desktop/package-lock.json" ]; then
+              echo "Found desktop/package.json and desktop/package-lock.json; will use npm ci"
+            else
+              echo "Found desktop/package.json but no desktop/package-lock.json; will fall back to npm install"
+            fi
           else
             echo "has_package_json=false" >> "$GITHUB_OUTPUT"
-            if [ ! -f "desktop/package.json" ]; then
-              echo "Skipping Node.js build: no desktop/package.json found"
-            elif [ ! -f "desktop/package-lock.json" ]; then
-              echo "Skipping Node.js build: desktop/package-lock.json missing (required for npm ci)"
-            fi
+            echo "Skipping Node.js build: no desktop/package.json found"
           fi
 
       - name: Setup Node.js from .nvmrc or fallback
@@ -53,7 +54,14 @@ jobs:
         if: steps.check_nodejs.outputs.has_package_json == 'true'
         timeout-minutes: 5
         working-directory: desktop
-        run: npm ci
+        run: |
+          if [ -f "package-lock.json" ]; then
+            echo "Using npm ci (package-lock.json found)"
+            npm ci
+          else
+            echo "Using npm install (no package-lock.json found)"
+            npm install
+          fi
 
       - name: Lint
         if: steps.check_nodejs.outputs.has_package_json == 'true'
