@@ -175,3 +175,9 @@ out/
 
 # Claude AI local files
 .claude/
+
+# VS Code local settings (not project config)
+.vscode/
+
+# Local planning/agent handoff notes
+plans/
