@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "description": "wscan+ Desktop — Linux-first Electron WiFi threat detection hub",
   "type": "module",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "lint": "echo \"No lint configured for desktop package yet\" && exit 0",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --runInBand --passWithNoTests"
   },
   "devDependencies": {
-    "electron": "30.0.0",
+    "electron": "41.0.2",
     "eslint": "9.0.0",
     "jest": "29.7.0"
   },
