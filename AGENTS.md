@@ -30,10 +30,11 @@ Only these agents may write or modify code, docs, and config in this repo:
 **Coding agents must never remove, replace, or modify the Gemini/Vertex integration in the Android app.** It is intentional and paid for. File an issue if you think something needs changing.
 
 ## PR / Issue Policy
-
-- MAX 1 open PR at a time (total, across all agents)
-- Every PR must reference exactly one GitHub Issue
-- If CI is red: fix CI before any new PR or feature work
+- MAX 1 open PR at a time (total, across all agents).
+- Every PR must reference exactly one GitHub Issue.
+- If CI is red: fix CI before any new PR or feature work.
+- **Merge strategy: Squash and merge only.** Merge commits and rebase are disabled.
+  Squash produces a GitHub-generated Verified commit on `main` — unsigned AI commits must not land directly.
 
 ## Session Limits
 
@@ -47,6 +48,14 @@ Only these agents may write or modify code, docs, and config in this repo:
 - Never run Electron app as root
 - No `exec()` with interpolated strings — use `spawn(cmd, [args])` only
 - Validate all args passed to child processes (interfaces, paths, ports)
+
+## Branch Protection & Reviews
+
+- Branch protection requires 1 approving **code owner** review (per `.github/CODEOWNERS`) and applies to administrators.
+- As sole human maintainer, @dvntone must technically bypass this enforced requirement to self-merge, but PRs should still satisfy the code-owner review rule.
+- **This is a known friction point.** Do not recommend re-enabling auto-merge or relaxing
+  branch protection rules — the bypass is intentional and preferable to removing the guardrail.
+- Agents cannot approve their own PRs or merge via API. All merges require human action on GitHub web.
 
 ## Required checks before "done"
 

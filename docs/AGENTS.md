@@ -73,6 +73,17 @@ Every change must be fully traceable back to the agent that made it:
 - Every PR must reference exactly one GitHub Issue
 - Never open a new PR while CI is failing — fix the broken build first
 
+## 1a. Merge Strategy — Squash Only
+
+- **Only squash merge is enabled on this repository.** Merge commits and rebase are disabled.
+- This is intentional and must not be re-enabled without explicit maintainer approval.
+- **Why squash is required for AI-authored work:** Squash merge produces a single
+  GitHub-generated, **Verified** commit on the protected branch. This ensures the commit
+  that lands on `main` is signed, even when the individual PR commits from AI agents are not.
+  Enabling merge commits or rebase would allow unsigned intermediate commits to land on `main`
+  directly, breaking commit verification.
+- Agents must never instruct the maintainer to re-enable merge commits or rebase.
+
 ## Section 2: Keep Changes Small and Atomic
 
 - One feature or one bugfix per PR — never combined
@@ -147,7 +158,8 @@ Every change must be fully traceable back to the agent that made it:
 - [ ] Documentation updated (or doc issue filed)
 - [ ] `.env` / `local.properties` NOT committed
 - [ ] No secrets of any kind committed
-- [ ] Required platform checks passed
+- [ ] Required platform checks passed (see table above)
+- [ ] Merged via **Squash and merge** only (merge commits and rebase are disabled)
 - [ ] Gemini/Vertex integration untouched (or issue filed if change needed)
 
 ## Repository Settings (as of 2026-03-14)
