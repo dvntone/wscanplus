@@ -83,7 +83,7 @@ Every change must be fully traceable back to the agent that made it:
   3. No unresolved `blocker` or `security` issues are open
   4. The PR references exactly one GitHub Issue
   5. No secrets are committed
-- After marking Ready for Review, wait for Copilot review to complete before merging.
+- After marking Ready for Review, wait for Copilot's automated review to complete before merging. Copilot review is a quality gate — it is not enforced by CODEOWNERS but must be read and addressed before merge.
 - Never mark a draft Ready for Review to force a faster merge — if CI is red, fix it first.
 
 ## 1a. Merge Strategy — Squash Only
@@ -162,7 +162,7 @@ Every change must be fully traceable back to the agent that made it:
 
 - [ ] Made by: [Claude / Copilot / dvntone]
 - [ ] References exactly one GitHub Issue
-- [ ] CI is green before this PR was opened
+- [ ] CI is green before marking Ready for Review (draft PRs open first, CI runs, then mark ready)
 - [ ] One feature OR one bugfix (not both)
 - [ ] < 200 LOC changed (tests excluded)
 - [ ] No new dependencies mixed in (or this IS a dependency-only PR)
@@ -186,7 +186,7 @@ Every change must be fully traceable back to the agent that made it:
 ### Agent Signing Limitation
 - Copilot (copilot-swe-agent) cannot sign individual commits.
 - Claude (anthropic-code-agent) cannot sign individual commits.
-- Squash merge via GitHub UI results in a verified, web-flow signed commit — this is the **intended and only approved merge method**.
+- Squash merge via GitHub UI or `gh pr merge --admin --squash` from the Claude Code CLI both result in a verified, web-flow signed commit — either is an approved merge method.
 
 ### PR Policy
 - PRs restricted to collaborators only.
