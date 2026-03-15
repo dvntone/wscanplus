@@ -14,7 +14,11 @@ All secrets must be configured in GitHub repository settings before CI/CD can ru
 | `ANDROID_KEY_PASSWORD` | Password for the signing key |
 | `ANDROID_STORE_PASSWORD` | Password for the keystore itself |
 
-**Status:** Keystore already created. Secrets not yet configured in GitHub.
+**Status:** ✅ All 4 secrets configured in GitHub (2026-03-15).
+Keystore file: stored locally outside the repo in a dedicated keystore directory (not committed). Back up securely.
+Generated via keytool (RSA 4096, validity 10000 days). Keep this file backed up securely.
+
+**Rotation:** Rotate freely before any Play Store submission. After first submission, the upload key is tied to the app — replacing it requires Google Play App Signing enrollment and a key upgrade request. Do not rotate post-submission without a tracked plan.
 
 To encode keystore for CI:
 ```bash
@@ -34,9 +38,11 @@ base64 -b 0 release.keystore > keystore.b64
 | Secret Name | Purpose |
 |-------------|---------|
 | `GOOGLE_MAPS_API_KEY` | Google Maps SDK for Android — scan history map, network heatmap |
-| `VERTEX_AI_API_KEY` | Vertex AI / Gemini — in-app threat analysis and AI heuristics |
+| `GOOGLE_MAPS_SIGNING_SECRET` | URL signing secret for server-side Maps API requests (without it: 25k/day unsigned cap) |
+| `VERTEX_AI_API_KEY` | Vertex AI / Gemini — in-app threat analysis and AI heuristics. Key is bound to a service account; access is controlled by that account's IAM permissions. |
 
-**Status:** Both APIs activated on Google Cloud (Google AI Pro). Secrets not yet configured in GitHub.
+**Status:** ✅ All 3 secrets configured in GitHub (2026-03-15).
+Rotation schedule: weekly pre-release, TBD post-release. Pre-release: consolidate service accounts and add per-key API restrictions.
 
 ---
 
