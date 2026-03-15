@@ -18,8 +18,13 @@ All secrets must be configured in GitHub repository settings before CI/CD can ru
 
 To encode keystore for CI:
 ```bash
+# Linux (GNU coreutils base64)
 base64 -w 0 release.keystore > keystore.b64
-# Paste contents of keystore.b64 as ANDROID_KEYSTORE secret value
+
+# macOS / BSD base64
+base64 -b 0 release.keystore > keystore.b64
+
+# Then paste contents of keystore.b64 as the ANDROID_KEYSTORE secret value
 ```
 
 ---
