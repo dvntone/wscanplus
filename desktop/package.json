@@ -12,12 +12,12 @@
   "dependencies": {
     "@yume-chan/adb": "2.5.1",
     "@yume-chan/adb-server-node-tcp": "2.5.2",
-    "ws": "8.20.0"
+    "ws": "8.21.0"
   },
   "devDependencies": {
     "@babel/preset-react": "7.28.5",
     "@eslint/js": "^10.0.1",
-    "electron": "41.1.1",
+    "electron": "41.10.6",
     "eslint": "10.3.0",
     "jest": "30.4.2",
     "react": "18.3.1",
